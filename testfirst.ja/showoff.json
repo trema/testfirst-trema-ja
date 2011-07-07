@@ -1,6 +1,6 @@
 {
   "name": "Test-First Trema",
-  "description": "リピータハブを作ろう",
+  "description": "How-to develop Trema applications in TDD",
   "sections": [
     { "section" : "intro" },
     { "section" : "design" },
