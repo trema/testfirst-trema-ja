@@ -1,0 +1,14 @@
+{
+  "name": "Test-First Trema",
+  "description": "リピータハブを作ろう",
+  "sections": [
+    { "section" : "intro" },
+    { "section" : "design" },
+    { "section" : "iteration1" },
+    { "section" : "iteration2" },
+    { "section" : "iteration3" },
+    { "section" : "iteration4" },
+    { "section" : "iteration5" },
+    { "section" : "summary" }
+  ]
+}
