@@ -253,10 +253,34 @@
 	=> FAIL (expected 1 packets, got 0)
 
 
-!SLIDE small
+!SLIDE bullets small
 # Matchers #####################################################################
 
-## TODO: マッチャの例と、エラー出力の違いを書く
+
+	@@@ ruby
+	vhost("host2").stats(:rx).should have(1).packets
+	
+	
+	# vs.
+	
+	
+	vhost("host2").stats(:rx).packets.size.should == 1
+
+
+!SLIDE small
+# Matchers (Error Message) #####################################################
+
+	@@@ ruby
+	vhost("host2").stats(:rx).should have(1).packets
+	#=> expected 1 packets, got 0
+	
+	
+	# vs.
+	
+	
+	vhost("host2").stats(:rx).packets.size.should == 1
+	#=> expected: 1
+	#        got: 0 (using ==)
 
 
 !SLIDE bullets small incremental
