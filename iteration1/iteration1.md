@@ -1,27 +1,29 @@
 !SLIDE master
-# イテレーション #1 #######################################################
-## "コントローラクラスを作る"
+# イテレーション #1 #############################################################
+## "RepeaterHub クラスを作る"
 
 
 !SLIDE bullets small
-# Trema 最初の一歩 ####################################################
+# 最初の一歩 ###################################################################
 
 	@@@ ruby
+	# ./spec/repeater-hub_spec.rb
+	
+	
 	# テスト用ヘルパーライブラリの読み込み
 	require File.join(File.dirname(__FILE__), "spec_helper")
 	
 	
 	describe RepeaterHub do
-	  # ここにリピータハブのスペックを書いていく
-	  # そのままテストコードとして実行される
+	  # ここにリピータハブが持つべき「機能」を書くと、
+	  # 機能テストが実行される
 	end
 
+* ※ 細かい文法は後で説明します
 
-* Ruby のテストフレームワーク [RSpec](http://relishapp.com/rspec) でテストを書く
 
-
-!SLIDE commandline small
-# Test First! #######################################################
+!SLIDE commandline bullets incremental small
+# Test First ###################################################################
 
 	@@@ commandline
 	$ rspec -fs -c spec/repeater-hub_spec.rb 
@@ -32,17 +34,22 @@
 	from /var/lib/gems/1.8/gems/rspec-core-2.6.3/lib/rspec/core/configuration.rb:419:in `load_spec_files'
 	from /var/lib/gems/1.8/gems/rspec-core-2.6.3/lib/rspec/core/command_line.rb:18:in `run'
 	  ...
-	=> FAIL
+	
+	
+	#=> FAIL ("RepeaterHub" is now known)
+
+* 失敗は予想通り (まだ何も実装していないし)
+* テストを通す最低限の実装を追加しよう
 
 
 !SLIDE small
-# 修正 ##############################################################
+# テストを通すための修正 ########################################################
 
 	@@@ ruby
 	require File.join( File.dirname( __FILE__ ), "spec_helper" )
 	
 	
-	# 空のクラス定義を追加	
+	# 空のクラス定義を追加し、NameError が起こらないようにする
 	class RepeaterHub
 	end
 	
@@ -51,8 +58,8 @@
 	end
 
 
-!SLIDE commandline
-# ふたたびテスト ########################################################
+!SLIDE commandline bullets small
+# ふたたびテスト ################################################################
 
 	@@@ commandline
 	$ rspec -fs -c spec/repeater-hub_spec.rb 
@@ -60,13 +67,29 @@
 	
 	Finished in 0.00003 seconds
 	0 examples, 0 failures
+	
+	
+	#=> SUCCESS
+
+* RepeaterHub とテストのひながたができた
+* イテレーション #1 終了
+
+
+!SLIDE bullets incremental small
+# RSpec ########################################################################
+
+* Ruby の標準的なユニットテストフレームワーク
+* Rails, そのほか有名プロジェクトで採用
+* 読みやすいテスト DSL (後述)
+* describe "クラス名" do ... end にクラスの機能 (= スペック) を記述
+* rspec コマンドでスペックをテストとして実行
 
 
 !SLIDE bullets small incremental
-# Why Test First?
+# Why Test First? ##############################################################
 
-* OpenFlow は動作シーケンスが複雑
-* 構成要素 (スイッチ、ホスト、コントローラ) も多い
-* どこで何が起こっているかわかりづらい
-* → そこで、ステップごとの動作テストが重要
-* → Trema はこのためのテストフレームワークを提供
+* OpenFlow プログラミングは複雑
+* 複雑な問題にはテストコードが有効
+* Ruby プログラマはテスト (テストファースト) が好き
+* Trema は RSpec によるテストファーストを推奨
+* Trema は OpenFlow をサポートする RSpec 拡張を提供 (後述)
