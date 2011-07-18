@@ -220,7 +220,7 @@
 	    network {
 	      # ...
 	    }.run(RepeaterHub) {
-	      send_packets "host1", "host2"
+	      vhost("host1").send_packet "host2"
 	
 	      # テスト: host2 と host3 がパケットを 1 つずつ受け取るはず
 	      vhost("host2").stats(:rx).should have(1).packets
