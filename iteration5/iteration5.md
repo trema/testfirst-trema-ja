@@ -1,16 +1,16 @@
 !SLIDE master
-# イテレーション #5 ##################################################
+# イテレーション #5 #############################################################
 ## "Packet-out"
 
 
 !SLIDE small
-# 宛先にパケットが届いてるか？ ##########################################
+# すべてのホストにパケットが届く? ################################################
 
 ## pending にしていたテストを復活
 
 	@@@ ruby
 	describe "host" do
-	  it "should receive packets" do
+	  it "should flood incoming packets to every other port" do
 	    send_packets "host1", "host2"
 	
 	    vhost("host2").stats(:rx).should have(1).packets
@@ -26,20 +26,16 @@
 
 	@@@ ruby
 	class RepeaterHub < Trema::Controller
-	  def packet_in message
+	  def packet_in datapath_id, message
 	    send_flow_mod_add(
-	      message.datapath_id,
-	      :match => Match.from(message),
-	      :buffer_id => message.buffer_id,
-	      :actions => ActionOutput.new(OFPP_FLOOD)
+	      datapath_id,
+	      :match => ExactMatch.from(message),
+	      :actions => Trema::ActionOutput.new(OFPP_FLOOD)
 	    )
-	    # 追加
-	    send_packet_out(
-	      message.datapath_id,
-	      message.buffer_id,
-	      message.in_port,
-	      ActionOutput.new(OFPP_FLOOD),
-	      message.data
+	    send_packet_out( # 追加
+	      datapath_id,
+	      :packet_in => message, # TODO: kwsk
+	      :actions => Trema::ActionOutput.new(OFPP_FLOOD)
 	    )
 	  end
 	end
@@ -58,4 +54,4 @@
 
 
 !SLIDE master
-# できた! (?)
+# できた! (?) ##################################################################
