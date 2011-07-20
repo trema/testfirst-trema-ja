@@ -22,7 +22,7 @@
 
 
 !SLIDE smaller
-# パケットアウトしよう
+# パケットアウトしよう ##########################################################
 
 	@@@ ruby
 	class RepeaterHub < Trema::Controller
