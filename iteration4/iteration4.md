@@ -186,10 +186,21 @@
 !SLIDE small
 # ExactMatch.from() ############################################################
 
-## Exact match を作るためのヘルパクラスで、次と同じ
-
 	@@@ ruby
-	# TODO: すべての属性を指定して Match を作るコード
+	ExactMatch.from(message)
+	
+	# vs.
+	
+	Match.new(
+	  :in_port = message.in_port,
+	  :nw_src => message.nw_src,
+	  :nw_dst => message.nw_dst,
+	  :tp_src => message.tp_src,
+	  :tp_dst => message.tp_dst,
+	  :dl_src => message.dl_src,
+	  :dl_dst => message.dl_dst,
+	    ...
+	)	      	
 
 
 !SLIDE full-page-image
