@@ -14,6 +14,32 @@
 ![Trema logo](trema.png)
 
 
+!SLIDE center
+# Trema チュートリアル ##############################################################
+
+## Yasuhito Takamiya
+## @yasuhito
+
+<br />
+
+## 6/9/2011
+
+<br />
+<br />
+
+![Debu](debu.png)
+
+
+!SLIDE full-page-image
+
+![GitHub](github_screenshot.png "GitHub")
+
+
+!SLIDE full-page-image
+
+![Twitter](twitter.png "Twitter")
+
+
 !SLIDE bullets incremental small
 # 自己紹介: 過去のプロジェクト #########################################################
 
