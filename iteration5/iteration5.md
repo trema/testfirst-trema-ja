@@ -1,10 +1,10 @@
 !SLIDE master
-# イテレーション #5 #############################################################
+# イテレーション #5 #################################################################
 ## "Packet-out"
 
 
 !SLIDE small
-# すべてのホストにパケットが届く? ################################################
+# すべてのホストにパケットが届く? #########################################################
 
 ## pending にしていたテストを復活
 
@@ -22,7 +22,7 @@
 
 
 !SLIDE smaller
-# パケットアウトしよう ##########################################################
+# パケットアウトしよう #################################################################
 
 	@@@ ruby
 	class RepeaterHub < Trema::Controller
@@ -34,13 +34,34 @@
 	    )
 	    send_packet_out( # 追加
 	      datapath_id,
-	      :packet_in => message, # TODO: kwsk
+	      :packet_in => message,
 	      :actions => Trema::ActionOutput.new(OFPP_FLOOD)
 	    )
 	  end
 	end
 	
 	# => SUCCESS
+
+
+!SLIDE small
+# パケットアウト API ################################################################
+
+	@@@ ruby
+	send_packet_out(
+	  datapath_id,
+	  :packet_in => message,
+	  :actions => Trema::ActionOutput.new(OFPP_FLOOD)
+	)
+	
+	# vs.
+
+	send_packet_out(
+	  datapath_id,
+	  :data => message.buffered? ? nil : message.data,
+	  :in_port => message.in_port,
+	  :buffer_id => message.buffer_id,
+	  :actions => Trema::ActionOutput.new(OFPP_FLOOD)
+	)
 
 
 !SLIDE full-page-image
@@ -54,4 +75,4 @@
 
 
 !SLIDE master
-# できた! (?) ##################################################################
+# できた! (?) ####################################################################
